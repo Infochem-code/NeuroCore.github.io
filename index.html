@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroCore Nuclear Studies - Student Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #0a2463;
+            --secondary: #3e92cc;
+            --accent: #d8315b;
+            --light: #f8f9fa;
+            --dark: #1e1b18;
+            --gray: #6c757d;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a3b8f 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--accent);
+            font-size: 1.8rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a.active {
+            color: var(--accent);
+        }
+
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            background: linear-gradient(rgba(10, 36, 99, 0.9), rgba(10, 36, 99, 0.8)), url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #c02a50;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #3586b8;
+        }
+
+        /* Main Content Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 1rem auto 0;
+        }
+
+        /* Dashboard Section */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            margin-top: 2rem;
+        }
+
+        .dashboard-sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .dashboard-sidebar h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background-color: #e9f2ff;
+            border-left-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .dashboard-content {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 1rem;
+        }
+
+        .skill-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .skill-input input {
+            flex: 1;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: #e9f2ff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .skill-tag i {
+            margin-left: 8px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .skill-tag i:hover {
+            color: var(--accent);
+        }
+
+        /* Competency Visualization */
+        .competency-visual {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .competency-level {
+            text-align: center;
+        }
+
+        .competency-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success) 0% 75%, #eee 75% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+
+        .competency-circle::before {
+            content: '';
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .competency-circle span {
+            position: relative;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* Process Steps */
+        .process-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .process-step i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .process-step h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Competencies */
+        .competencies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 3rem;
+        }
+
+        .competency-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .competency-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .competency-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .competency-header i {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .competency-body {
+            padding: 1.5rem;
+        }
+
+        .skill-level {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background-color: var(--success);
+            border-radius: 5px;
+        }
+
+        /* Student Profile */
+        .profile {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            object-fit: cover;
+        }
+
+        .profile-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .profile-body {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .profile-section h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .profile-header {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            .process-step {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-atom"></i>
+                </div>
+                <h1>Neuro<span>Core</span> Nuclear</h1>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#dashboard">Student Dashboard</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#competencies">Competencies</a></li>
+                    <li><a href="#profile">Profile</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>NeuroCore Nuclear Studies: Student Portal</h2>
+            <p>Upload and manage your academic data, track competencies, and showcase your progress in NeuroCore Nuclear Studies.</p>
+            <a href="#dashboard" class="btn">Go to Dashboard</a>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" style="background-color: #f0f4f8;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Dashboard</h2>
+                <p>Manage your personal information, academic data, and track your competencies</p>
+            </div>
+            
+            <div class="dashboard-container">
+                <!-- Sidebar Navigation -->
+                <div class="dashboard-sidebar">
+                    <h3>Dashboard Menu</h3>
+                    <nav class="sidebar-nav">
+                        <ul>
+                            <li><a href="#personal-info" class="sidebar-link active">Personal Information</a></li>
+                            <li><a href="#academic-data" class="sidebar-link">Academic Data</a></li>
+                            <li><a href="#competencies-upload" class="sidebar-link">Competencies Upload</a></li>
+                            <li><a href="#subjects-interest" class="sidebar-link">Subjects of Interest</a></li>
+                            <li><a href="#progress-tracker" class="sidebar-link">Progress Tracker</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <div class="competency-visual" style="margin-top: 2rem;">
+                        <div class="competency-level">
+                            <div class="competency-circle">
+                                <span id="overallCompetency">75%</span>
+                            </div>
+                            <p>Overall Competency</p>
+                        </div>
+                        <div>
+                            <p><strong>Last Updated:</strong> <span id="lastUpdated">Today</span></p>
+                            <p><strong>Profile Complete:</strong> <span id="profileComplete">80%</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dashboard Content -->
+                <div class="dashboard-content">
+                    <!-- Personal Information Tab -->
+                    <div id="personal-info" class="tab-content active">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Personal Information</h3>
+                        <form id="personalInfoForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" placeholder="Enter your full name" value="Alexandra Chen">
+                                </div>
+                                <div class="form-group">
+                                    <label for="studentId">Student ID</label>
+                                    <input type="text" id="studentId" placeholder="Enter student ID" value="NCNS2023017">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dateOfBirth">Date of Birth</label>
+                                    <input type="date" id="dateOfBirth" value="2000-05-15">
+                                </div>
+                                <div class="form-group">
+                                    <label for="age">Age</label>
+                                    <input type="number" id="age" min="16" max="60" value="23" readonly>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <select id="country">
+                                        <option value="usa">United States</option>
+                                        <option value="canada">Canada</option>
+                                        <option value="uk">United Kingdom</option>
+                                        <option value="germany">Germany</option>
+                                        <option value="japan">Japan</option>
+                                        <option value="australia">Australia</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactNumber">Contact Number</label>
+                                    <input type="tel" id="contactNumber" placeholder="Enter contact number" value="+1 (555) 123-4567">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="Enter your email" value="a.chen@neurocore-nuclear.edu">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea id="address" rows="3" placeholder="Enter your address">Institute of Advanced Neural & Nuclear Sciences, 123 Research Drive, Science City</textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Save Personal Information</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Academic Data Tab -->
+                    <div id="academic-data" class="tab-content">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Academic Data</h3>
+                        <form id="academicDataForm">
+                            <div class="form-group">
+                                <label for="currentYear">Current Academic Year</label>
+                                <select id="currentYear">
+                                    <option value="1">Year 1</option>
+                                    <option value="2">Year 2</option>
+                                    <option value="3" selected>Year 3</option>
+                                    <option value="4">Year 4</option>
+                                    <option value="5">Year 5 (Postgrad)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gpa">Current GPA</label>
+                                <input type="number" id="gpa" min="0" max="4" step="0.01" placeholder="Enter your GPA" value="3.78">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="enrollmentDate">Enrollment Date</label>
+                                <input type="date" id="enrollmentDate" value="2021-09-01">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="expectedGraduation">Expected Graduation Date</label>
+                                <input type="date" id="expectedGraduation" value="2024-06-15">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="thesisTopic">Thesis/Research Topic</label>
+                                <textarea id="thesisTopic" rows="3" placeholder="Describe your thesis or research topic">Developing novel radiotracers for early detection of neurodegenerative diseases using short-lived isotopes and investigating neuroprotective agents against radiation exposure in space exploration contexts.</textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Save Academic Data</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Competencies Upload Tab -->
+                    <div id="competencies-upload" class="tab-content">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Competencies Upload</h3>
+                        <p style="margin-bottom: 1.5rem;">Update your competency levels in key NeuroCore Nuclear study areas</p>
+                        
+                        <form id="competenciesForm">
+                            <div class="form-group">
+                                <label>Radiation Safety & Protocols</label>
+                                <input type="range" id="radiationSafety" min="0" max="100" value="92" class="competency-slider">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>0%</span>
+                                    <span id="radiationSafetyValue">92%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Neuroimaging Analysis (PET/SPECT/fMRI)</label>
+                                <input type="range" id="neuroimaging" min="0" max="100" value="88" class="competency-slider">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>0%</span>
+                                    <span id="neuroimagingValue">88%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Radiopharmaceutical Development</label>
+                                <input type="range" id="radiopharmaceuticals" min="0" max="100" value="85" class="competency-slider">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>0%</span>
+                                    <span id="radiopharmaceuticalsValue">85%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Computational Modeling & Simulation</label>
+                                <input type="range" id="computationalModeling" min="0" max="100" value="90" class="competency-slider">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>0%</span>
+                                    <span id="computationalModelingValue">90%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Radiation-Neural Interaction Studies</label>
+                                <input type="range" id="radiationNeural" min="0" max="100" value="78" class="competency-slider">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>0%</span>
+                                    <span id="radiationNeuralValue">78%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn">Update Competencies</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Subjects of Interest Tab -->
+                    <div id="subjects-interest" class="tab-content">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Subjects of Interest</h3>
+                        <p style="margin-bottom: 1.5rem;">Add subjects you're interested in or currently studying</p>
+                        
+                        <form id="subjectsForm">
+                            <div class="form-group">
+                                <label for="newSubject">Add New Subject</label>
+                                <div class="skill-input">
+                                    <input type="text" id="newSubject" placeholder="Enter a subject (e.g., Neural Radiotracers)">
+                                    <button type="button" id="addSubject" class="btn" style="padding: 10px 20px;">Add</button>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Your Subjects of Interest</label>
+                                <div id="subjectsContainer">
+                                    <!-- Subjects will be added here dynamically -->
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="researchInterests">Research Interests Description</label>
+                                <textarea id="researchInterests" rows="4" placeholder="Describe your research interests and goals">I'm particularly interested in the development of novel radiotracers for early neurodegenerative disease detection, neuroprotection against radiation in space exploration, and advanced neural imaging techniques that combine nuclear medicine with computational neuroscience.</textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn">Save Subjects & Interests</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Progress Tracker Tab -->
+                    <div id="progress-tracker" class="tab-content">
+                        <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Progress Tracker</h3>
+                        <p style="margin-bottom: 1.5rem;">View your academic progress and competency development over time</p>
+                        
+                        <div class="form-group">
+                            <label>Overall Program Completion</label>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%; background-color: var(--secondary);"></div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span>0%</span>
+                                <span>65% Complete</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Competency Development Progress</label>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%;"></div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                                <span>0%</span>
+                                <span>80% Developed</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; padding: 1.5rem; background-color: #f8f9fa; border-radius: 8px;">
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;">Recent Updates</h4>
+                            <ul style="list-style-type: none;">
+                                <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
+                                    <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
+                                    <strong>Today:</strong> Updated competency levels
+                                </li>
+                                <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
+                                    <i class="fas fa-book" style="color: var(--secondary); margin-right: 10px;"></i>
+                                    <strong>Last Week:</strong> Completed Neural Radiotracers module
+                                </li>
+                                <li style="padding: 10px 0; border-bottom: 1px solid #eee;">
+                                    <i class="fas fa-flask" style="color: var(--accent); margin-right: 10px;"></i>
+                                    <strong>Last Month:</strong> Submitted research paper on neuroprotection
+                                </li>
+                                <li style="padding: 10px 0;">
+                                    <i class="fas fa-award" style="color: var(--warning); margin-right: 10px;"></i>
+                                    <strong>Last Quarter:</strong> Received NeuroCore Research Excellence Award
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 2rem;">
+                            <button class="btn" id="exportData">
+                                <i class="fas fa-download" style="margin-right: 8px;"></i>Export My Data
+                            </button>
+                            <button class="btn btn-secondary" id="printProgress" style="margin-left: 10px;">
+                                <i class="fas fa-print" style="margin-right: 8px;"></i>Print Progress Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section (unchanged) -->
+    <section id="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Step-by-Step Learning Process</h2>
+                <p>My structured approach to mastering NeuroCore Nuclear Studies</p>
+            </div>
+            
+            <div class="process-container">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <i class="fas fa-brain"></i>
+                    <h3>Neural Fundamentals</h3>
+                    <p>Master core neuroscience concepts including neural networks, synaptic transmission, and brain imaging techniques.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <i class="fas fa-radiation"></i>
+                    <h3>Nuclear Principles</h3>
+                    <p>Study nuclear physics, radiation safety, isotope production, and nuclear reactor fundamentals.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <i class="fas fa-syringe"></i>
+                    <h3>Medical Applications</h3>
+                    <p>Apply nuclear techniques to neuroscience: radiopharmaceuticals, PET scans, and radiation therapy for neurological disorders.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>Integration & Research</h3>
+                    <p>Combine both fields to develop innovative solutions for brain imaging, neuroprotection, and neural energy systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>NeuroCore Nuclear</h3>
+                    <p>Student data management portal for NeuroCore Nuclear Studies specialization.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#dashboard">Student Dashboard</a></li>
+                        <li><a href="#process">Learning Process</a></li>
+                        <li><a href="#competencies">Competencies</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Data Management</h3>
+                    <ul>
+                        <li><i class="fas fa-shield-alt"></i> Secure data storage</li>
+                        <li><i class="fas fa-sync-alt"></i> Real-time updates</li>
+                        <li><i class="fas fa-chart-line"></i> Progress tracking</li>
+                        <li><i class="fas fa-download"></i> Data export</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 NeuroCore Nuclear Studies Student Portal. All student data is stored locally in your browser.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dashboard functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('show');
+            });
+            
+            // Close mobile menu when clicking on a link
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('show');
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Update active navigation link on scroll
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const sections = document.querySelectorAll('section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if(scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Dashboard sidebar navigation
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and tabs
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    tabContents.forEach(tab => tab.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show corresponding tab content
+                    const tabId = this.getAttribute('href');
+                    const tab = document.querySelector(tabId);
+                    if(tab) {
+                        tab.classList.add('active');
+                    }
+                });
+            });
+            
+            // Calculate age from date of birth
+            const dobInput = document.getElementById('dateOfBirth');
+            const ageInput = document.getElementById('age');
+            
+            function calculateAge() {
+                const dob = new Date(dobInput.value);
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const monthDiff = today.getMonth() - dob.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+                
+                ageInput.value = age;
+            }
+            
+            dobInput.addEventListener('change', calculateAge);
+            
+            // Initialize with calculated age
+            calculateAge();
+            
+            // Competency sliders
+            const competencySliders = document.querySelectorAll('.competency-slider');
+            
+            competencySliders.forEach(slider => {
+                const valueSpan = document.getElementById(slider.id + 'Value');
+                
+                // Update value display when slider changes
+                slider.addEventListener('input', function() {
+                    valueSpan.textContent = this.value + '%';
+                    updateOverallCompetency();
+                });
+                
+                // Initialize display
+                valueSpan.textContent = slider.value + '%';
+            });
+            
+            // Update overall competency
+            function updateOverallCompetency() {
+                let total = 0;
+                competencySliders.forEach(slider => {
+                    total += parseInt(slider.value);
+                });
+                
+                const average = Math.round(total / competencySliders.length);
+                document.getElementById('overallCompetency').textContent = average + '%';
+                
+                // Update the competency circle
+                const circle = document.querySelector('.competency-circle');
+                circle.style.background = `conic-gradient(var(--success) 0% ${average}%, #eee ${average}% 100%)`;
+            }
+            
+            // Initialize overall competency
+            updateOverallCompetency();
+            
+            // Subjects of interest functionality
+            const subjects = [
+                "Neural Radiotracers",
+                "Radiation Neuroprotection",
+                "PET/SPECT Neuroimaging",
+                "Computational Neuroscience",
+                "Nuclear Medicine Physics"
+            ];
+            
+            const subjectsContainer = document.getElementById('subjectsContainer');
+            const newSubjectInput = document.getElementById('newSubject');
+            const addSubjectBtn = document.getElementById('addSubject');
+            
+            function renderSubjects() {
+                subjectsContainer.innerHTML = '';
+                subjects.forEach((subject, index) => {
+                    const subjectTag = document.createElement('div');
+                    subjectTag.className = 'skill-tag';
+                    subjectTag.innerHTML = `
+                        ${subject}
+                        <i class="fas fa-times remove-subject" data-index="${index}"></i>
+                    `;
+                    subjectsContainer.appendChild(subjectTag);
+                });
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-subject').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        subjects.splice(index, 1);
+                        renderSubjects();
+                    });
+                });
+            }
+            
+            // Initialize subjects
+            renderSubjects();
+            
+            // Add new subject
+            addSubjectBtn.addEventListener('click', function() {
+                const newSubject = newSubjectInput.value.trim();
+                if (newSubject && !subjects.includes(newSubject)) {
+                    subjects.push(newSubject);
+                    renderSubjects();
+                    newSubjectInput.value = '';
+                }
+            });
+            
+            // Allow adding subject with Enter key
+            newSubjectInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addSubjectBtn.click();
+                }
+            });
+            
+            // Form submissions
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // In a real application, this would send data to a server
+                    // For this demo, we'll just show a success message
+                    showNotification('Data saved successfully!', 'success');
+                    
+                    // Update last updated time
+                    const now = new Date();
+                    document.getElementById('lastUpdated').textContent = 
+                        now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    
+                    // Update profile completeness
+                    updateProfileCompleteness();
+                });
+            });
+            
+            // Export data functionality
+            document.getElementById('exportData').addEventListener('click', function() {
+                // Collect all data from forms
+                const studentData = {
+                    personalInfo: {
+                        name: document.getElementById('fullName').value,
+                        studentId: document.getElementById('studentId').value,
+                        dob: document.getElementById('dateOfBirth').value,
+                        age: document.getElementById('age').value,
+                        country: document.getElementById('country').value,
+                        contact: document.getElementById('contactNumber').value,
+                        email: document.getElementById('email').value,
+                        address: document.getElementById('address').value
+                    },
+                    academicData: {
+                        year: document.getElementById('currentYear').value,
+                        gpa: document.getElementById('gpa').value,
+                        enrollmentDate: document.getElementById('enrollmentDate').value,
+                        graduationDate: document.getElementById('expectedGraduation').value,
+                        thesis: document.getElementById('thesisTopic').value
+                    },
+                    competencies: {
+                        radiationSafety: document.getElementById('radiationSafety').value,
+                        neuroimaging: document.getElementById('neuroimaging').value,
+                        radiopharmaceuticals: document.getElementById('radiopharmaceuticals').value,
+                        computationalModeling: document.getElementById('computationalModeling').value,
+                        radiationNeural: document.getElementById('radiationNeural').value
+                    },
+                    interests: {
+                        subjects: subjects,
+                        researchInterests: document.getElementById('researchInterests').value
+                    },
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Convert to JSON and create download
+                const dataStr = JSON.stringify(studentData, null, 2);
+                const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+                
+                const exportFileDefaultName = `neurocore-student-data-${new Date().toISOString().slice(0,10)}.json`;
+                
+                const linkElement = document.createElement('a');
+                linkElement.setAttribute('href', dataUri);
+                linkElement.setAttribute('download', exportFileDefaultName);
+                linkElement.click();
+                
+                showNotification('Data exported successfully!', 'success');
+            });
+            
+            // Print progress
+            document.getElementById('printProgress').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Show notification
+            function showNotification(message, type) {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 15px 20px;
+                    background-color: ${type === 'success' ? 'var(--success)' : 'var(--accent)'};
+                    color: white;
+                    border-radius: 4px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease-out;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+                
+                // Add keyframes for animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            // Update profile completeness
+            function updateProfileCompleteness() {
+                // Simple calculation - count filled fields
+                let filledFields = 0;
+                let totalFields = 0;
+                
+                // Check personal info form
+                const personalForm = document.getElementById('personalInfoForm');
+                const personalInputs = personalForm.querySelectorAll('input, select, textarea');
+                personalInputs.forEach(input => {
+                    totalFields++;
+                    if (input.value.trim() !== '') filledFields++;
+                });
+                
+                // Check academic form
+                const academicForm = document.getElementById('academicDataForm');
+                const academicInputs = academicForm.querySelectorAll('input, select, textarea');
+                academicInputs.forEach(input => {
+                    totalFields++;
+                    if (input.value.trim() !== '') filledFields++;
+                });
+                
+                // Check subjects
+                totalFields++;
+                if (subjects.length > 0) filledFields++;
+                
+                // Check research interests
+                totalFields++;
+                if (document.getElementById('researchInterests').value.trim() !== '') filledFields++;
+                
+                const completeness = Math.round((filledFields / totalFields) * 100);
+                document.getElementById('profileComplete').textContent = completeness + '%';
+            }
+            
+            // Initialize profile completeness
+            updateProfileCompleteness();
+        });
+    </script>
+</body>
+</html>
